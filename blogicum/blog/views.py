@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.http import Http404
 
 posts = [
     {
@@ -43,17 +44,22 @@ posts = [
     },
 ]
 
+dict_posts = {post["id"]: post for post in posts}
+
 
 def index(request):
     template = 'blog/index.html'
-    context = {'post': posts}
+    context = {'posts': posts}
     return render(request, template, context)
 
 
 def post_detail(request, id):
     template = 'blog/detail.html'
-    context = {'post': posts[id]}
-    return render(request, template, context)
+    if id in dict_posts:
+        context = {'post': dict_posts[id]}  # ключ posts ломает тесты О_о
+        return render(request, template, context)
+    else:
+        return Http404("post not found")
 
 
 def category_posts(request, category_slug):

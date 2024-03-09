@@ -4,9 +4,8 @@
 {% endblock %}
   
 {% block content %}
-  <div class="container py-5">
-    <h1>Лента записей</h1>    
-    {% for my_post in post reversed %}                   
+  <h1>Лента записей</h1>    
+  {% for my_post in posts reversed %}                   
     <hr>
     <article>
       <ul>
@@ -22,15 +21,14 @@
             {{ my_post.category }} 
           </a> 
         </li>
-      </ul>          
-      <!-- Первые 10 слов -->
+      </ul>        
       <p>
+        {# <Первые 10 слов> #} 
         {{ my_post.text|truncatewords:10 }} 
       </p>
       <a href=" {% url "blog:post_detail"  my_post.id %}">
         Читать полный текст
       </a> 
     </article>
-    {% endfor %}
-  </div>
+  {% endfor %}
 {% endblock %}

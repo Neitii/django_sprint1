@@ -1,11 +1,10 @@
 {% extends "base.html" %}
 {% block title %}
-  <!-- Формируется из локации и даты -->
+  {# <Формируется из локации и даты> #}
   {{ post.location }}  {{ post.date }}  
 {% endblock %}
 
 {% block content %}
-<div class="container py-5">
   <article>
     <ul>
       <li>
@@ -24,5 +23,4 @@
       {{ post.text|linebreaksbr }}
     </p>          
   </article>                
-</div>
 {% endblock %}
