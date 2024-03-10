@@ -7,24 +7,23 @@
         Блогикум
       </a>        
       <ul class="nav  nav-pills">
+        {% with request.resolver_match.view_name as url %}
         <li class="nav-item">
-          {% url 'blog:index' as index_url %}
-          <a class="nav-link {% if request.path == index_url %}active{% endif %}" href="{% url 'blog:index' %}">
+          <a class="nav-link {% if url == 'blog:index' %}active{% endif %}" href="{% url 'blog:index' %}">
               Лента записей
           </a>
         </li>
         <li class="nav-item">
-          {% url 'pages:about' as about_url %}
-          <a class="nav-link {% if request.path == about_url %}active{% endif %}" href="{% url 'pages:about' %}">
+          <a class="nav-link {% if url == 'pages:about' %}active{% endif %}" href="{% url 'pages:about' %}">
             О проекте
           </a>
         </li>
         <li class="nav-item">
-          {% url 'pages:rules' as rules_url %}
-          <a class="nav-link {% if request.path == rules_url %}active{% endif %}" href="{% url 'pages:rules' %}">
+          <a class="nav-link {% if url == 'pages:rules' %}active{% endif %}" href="{% url 'pages:rules' %}">
             Наши правила
           </a>
         </li>
+        {% endwith %}
       </ul>      
     </div>
   </nav> 

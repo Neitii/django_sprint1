@@ -1,5 +1,6 @@
-from django.shortcuts import render
+
 from django.http import Http404
+from django.shortcuts import render
 
 posts = [
     {
@@ -55,11 +56,12 @@ def index(request):
 
 def post_detail(request, id):
     template = 'blog/detail.html'
-    if id in dict_posts:
-        context = {'post': dict_posts[id]}  # ключ posts ломает тесты О_о
-        return render(request, template, context)
-    else:
-        return Http404("post not found")
+    try:
+        post = dict_posts[id]
+    except KeyError:
+        raise Http404("Post not found")
+    context = {'post': post}
+    return render(request, template, context)
 
 
 def category_posts(request, category_slug):
